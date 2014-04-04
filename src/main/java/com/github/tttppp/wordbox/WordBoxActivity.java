@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.github.tttppp.wordbox.ui.component.FontFitTextView;
+
 public class WordBoxActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
@@ -28,7 +30,7 @@ public class WordBoxActivity extends Activity {
 			                                           LayoutParams.MATCH_PARENT,
 			                                           1f);
 			for (int j = 0; j < 4; j++) {
-				TextView cell = new TextView(this);
+				TextView cell = new FontFitTextView(this);
 				cell.setLayoutParams(cellLayout);
 				cell.setGravity(Gravity.CENTER);
 				cell.setText(randomLetter());
