@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_new"
+          android:icon="@drawable/ic_menu_play_clip"
+          android:title="@string/menu_new" />
+ 
+    <item android:id="@+id/menu_toggle_timer"
+          android:icon="@drawable/ic_menu_recent_history"
+          android:title="@string/menu_toggle_timer" />
+ 
+    <item android:id="@+id/menu_solve"
+          android:icon="@drawable/ic_menu_find"
+          android:title="@string/menu_solve" />
+ 
+    <item android:id="@+id/menu_settings"
+          android:icon="@drawable/ic_menu_preferences"
+          android:title="@string/menu_settings" />
+</menu>

@@ -7,10 +7,14 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import android.widget.Toast;
 
 import com.github.tttppp.wordbox.ui.component.FontFitTextView;
 
@@ -22,7 +26,7 @@ public class WordBoxActivity extends Activity {
 		setContentView(R.layout.main);
 
 		LinearLayout wordGrid = (LinearLayout) findViewById(R.id.wordgrid);
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 4; i++) {
 			LinearLayout row = new LinearLayout(this);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
 			                                   LayoutParams.MATCH_PARENT, 1f);
@@ -58,5 +62,42 @@ public class WordBoxActivity extends Activity {
 		Random rand = new Random();
 		int i = rand.nextInt(3);
 		return Arrays.asList(Color.RED, Color.CYAN, Color.YELLOW).get(i);
+	}
+
+	/** When the menu button is clicked. */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.layout.main_menu, menu);
+		return true;
+	}
+
+	/** Event handling for menu items. */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_new:
+			Toast.makeText(WordBoxActivity.this, "New is Selected",
+			               Toast.LENGTH_SHORT).show();
+			return true;
+
+		case R.id.menu_toggle_timer:
+			Toast.makeText(WordBoxActivity.this, "Toggle Timer is Selected",
+			               Toast.LENGTH_SHORT).show();
+			return true;
+
+		case R.id.menu_solve:
+			Toast.makeText(WordBoxActivity.this, "Solve is Selected",
+			               Toast.LENGTH_SHORT).show();
+			return true;
+
+		case R.id.menu_settings:
+			Toast.makeText(WordBoxActivity.this, "Settings is Selected",
+			               Toast.LENGTH_SHORT).show();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

@@ -3,5 +3,10 @@
 
     <string name="app_name">WordBox</string>
     <string name="hello">Welcome to WordBox</string>
+    
+    <string name="menu_new">New</string>
+    <string name="menu_toggle_timer">Toggle Timer</string>
+    <string name="menu_solve">Solve Grid</string>
+    <string name="menu_settings">Settings</string>
 
 </resources>
