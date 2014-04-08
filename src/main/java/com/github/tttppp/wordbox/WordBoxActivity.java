@@ -4,8 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import com.github.tttppp.wordbox.persistence.PersistanceName;
 import com.github.tttppp.wordbox.ui.component.FontFitTextView;
 
 public class WordBoxActivity extends Activity {
@@ -82,8 +86,21 @@ public class WordBoxActivity extends Activity {
 			return true;
 
 		case R.id.menu_toggle_timer:
-			Toast.makeText(WordBoxActivity.this, "Toggle Timer is Selected",
-			               Toast.LENGTH_SHORT).show();
+			SharedPreferences preferences = PreferenceManager
+			    .getDefaultSharedPreferences(getApplicationContext());
+			Editor editor = preferences.edit();
+			boolean previousValue = preferences
+			    .getBoolean(PersistanceName.TIMER_VISIBLE.name(), false);
+			editor.putBoolean(PersistanceName.TIMER_VISIBLE.name(),
+			                  !previousValue);
+			editor.commit();
+			if (previousValue) {
+				Toast.makeText(WordBoxActivity.this, "Timer is now off",
+				               Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(WordBoxActivity.this, "Timer is now on",
+				               Toast.LENGTH_SHORT).show();
+			}
 			return true;
 
 		case R.id.menu_solve:
