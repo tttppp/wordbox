@@ -23,14 +23,42 @@ import com.github.tttppp.wordbox.persistence.PersistanceName;
 import com.github.tttppp.wordbox.ui.component.FontFitTextView;
 
 public class WordBoxActivity extends Activity {
+	private SharedPreferences preferences;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		preferences = PreferenceManager
+		    .getDefaultSharedPreferences(getApplicationContext());
+
+		int gridSize = preferences.getInt(PersistanceName.GRID_SIZE.name(), 0);
+
+		if (gridSize == 0) {
+			gridSize = 4;
+
+			Editor editor = preferences.edit();
+			editor.putInt(PersistanceName.GRID_SIZE.name(), gridSize);
+
+			for (int i = 0; i < gridSize; i++) {
+				for (int j = 0; j < gridSize; j++) {
+					String name = PersistanceName.GRID_LETTERS.name(i
+					    * gridSize + j);
+					editor.putString(name, randomLetter());
+				}
+			}
+
+			editor.commit();
+		}
+
+		makeGrid(gridSize);
+	}
+
+	private void makeGrid(int gridSize) {
 		LinearLayout wordGrid = (LinearLayout) findViewById(R.id.wordgrid);
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < gridSize; i++) {
 			LinearLayout row = new LinearLayout(this);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
 			                                   LayoutParams.MATCH_PARENT, 1f);
@@ -43,12 +71,15 @@ public class WordBoxActivity extends Activity {
 			                                           LayoutParams.MATCH_PARENT,
 			                                           1f);
 			cellLayout.setMargins(0, 0, 0, 0);
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < gridSize; j++) {
 				TextView cell = new FontFitTextView(this);
 				cell.setLayoutParams(cellLayout);
 				cell.setPadding(1, 1, 1, 1);
 				cell.setGravity(Gravity.CENTER);
-				cell.setText(randomLetter(), BufferType.SPANNABLE);
+				String name = PersistanceName.GRID_LETTERS.name(i * gridSize
+				    + j);
+				String cellStr = preferences.getString(name, "");
+				cell.setText(cellStr, BufferType.SPANNABLE);
 				cell.setIncludeFontPadding(false);
 				row.addView(cell);
 			}
@@ -86,8 +117,6 @@ public class WordBoxActivity extends Activity {
 			return true;
 
 		case R.id.menu_toggle_timer:
-			SharedPreferences preferences = PreferenceManager
-			    .getDefaultSharedPreferences(getApplicationContext());
 			Editor editor = preferences.edit();
 			boolean previousValue = preferences
 			    .getBoolean(PersistanceName.TIMER_VISIBLE.name(), false);
