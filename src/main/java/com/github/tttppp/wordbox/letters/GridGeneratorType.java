@@ -1,5 +1,5 @@
 package com.github.tttppp.wordbox.letters;
 
 public enum GridGeneratorType {
-	ALPHABET, OLD_DISTRIBUTION, NEW_DISTRIBUTION
+	ALPHABET, FREQUENCY, OLD_DISTRIBUTION, NEW_DISTRIBUTION, FIVE_BY_FIVE;
 }

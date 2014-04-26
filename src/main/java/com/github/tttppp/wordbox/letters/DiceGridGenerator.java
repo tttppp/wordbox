@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
 public class DiceGridGenerator implements GridGenerator {
 	List<List<String>> dice;
 
@@ -23,6 +25,8 @@ public class DiceGridGenerator implements GridGenerator {
 		while (diceToUse.size() > gridSize * gridSize) {
 			diceToUse.remove(0);
 		}
+
+		Collections.shuffle(diceToUse);
 
 		List<List<String>> grid = new ArrayList<List<String>>();
 		for (int i = 0; i < gridSize; i++) {

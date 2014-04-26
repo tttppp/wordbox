@@ -3,9 +3,9 @@ package com.github.tttppp.wordbox.letters;
 import java.util.Arrays;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class LetterDistributions {
 	// @formatter:off
-	@SuppressWarnings("unchecked")
     public static List<List<String>> newSet = Arrays.asList(
         Arrays.asList("A","A","E","E","G","N"),
         Arrays.asList("E","L","R","T","T","Y"),
@@ -23,7 +23,6 @@ public class LetterDistributions {
         Arrays.asList("A","F","F","K","P","S"),
         Arrays.asList("H","L","N","N","R","Z"),
         Arrays.asList("D","E","I","L","R","X"));
-	@SuppressWarnings("unchecked")
     public static List<List<String>> oldSet = Arrays.asList(
 	    Arrays.asList("A","A","C","I","O","T"),
 		Arrays.asList("A","H","M","O","R","S"),
@@ -41,5 +40,31 @@ public class LetterDistributions {
 		Arrays.asList("D","K","N","O","T","U"),
 		Arrays.asList("A","D","E","N","V","Z"),
 		Arrays.asList("B","I","F","O","R","X"));
+    public static List<List<String>> fiveByFive = Arrays.asList(
+        Arrays.asList("A","A","A","F","R","S"),
+        Arrays.asList("A","A","E","E","E","E"),
+        Arrays.asList("A","A","F","I","R","S"),
+        Arrays.asList("A","D","E","N","N","N"),
+        Arrays.asList("A","E","E","E","E","M"),
+        Arrays.asList("A","E","E","G","M","U"),
+        Arrays.asList("A","E","G","M","N","N"),
+        Arrays.asList("A","F","I","R","S","Y"),
+        Arrays.asList("B","J","K","Qu","X","Z"),
+        Arrays.asList("C","C","E","N","S","T"),
+        Arrays.asList("C","E","I","I","L","T"),
+        Arrays.asList("C","E","I","L","P","T"),
+        Arrays.asList("C","E","I","P","S","T"),
+        Arrays.asList("D","D","H","N","O","T"),
+        Arrays.asList("D","H","H","L","O","R"),
+        Arrays.asList("D","H","L","N","O","R"),
+        Arrays.asList("D","H","L","N","O","R"),
+        Arrays.asList("E","I","I","I","T","T"),
+        Arrays.asList("E","M","O","T","T","T"),
+        Arrays.asList("E","N","S","S","S","U"),
+        Arrays.asList("F","I","P","R","S","Y"),
+        Arrays.asList("G","O","R","R","V","W"),
+        Arrays.asList("I","P","R","R","R","Y"),
+        Arrays.asList("N","O","O","T","U","W"),
+        Arrays.asList("O","O","O","T","T","U"));
 	// @formatter:on
 }

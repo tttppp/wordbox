@@ -1,13 +1,10 @@
 package com.github.tttppp.wordbox;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
@@ -55,7 +52,7 @@ public class WordBoxActivity extends Activity {
 	 */
 	private void drawNewGrid(int gridSize) {
 		String typeName = preferences.getString(PersistanceName.GENERATION_TYPE
-		    .name(), GridGeneratorType.ALPHABET.name());
+		    .name(), GridGeneratorType.NEW_DISTRIBUTION.name());
 		GridGeneratorType type = GridGeneratorType.valueOf(typeName);
 		GridGenerator gridGenerator = GridGeneratorFactory
 		    .getGridGenerator(type);
@@ -112,18 +109,6 @@ public class WordBoxActivity extends Activity {
 			}
 			wordGrid.addView(row);
 		}
-	}
-
-	private String randomLetter() {
-		Random rand = new Random();
-		int i = rand.nextInt(26);
-		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".substring(i, i + 1);
-	}
-
-	private int randomColor() {
-		Random rand = new Random();
-		int i = rand.nextInt(3);
-		return Arrays.asList(Color.RED, Color.CYAN, Color.YELLOW).get(i);
 	}
 
 	/** When the menu button is clicked. */
