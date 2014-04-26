@@ -38,26 +38,42 @@ public class WordBoxActivity extends Activity {
 
 		if (gridSize == 0) {
 			gridSize = 4;
-
-			Editor editor = preferences.edit();
-			editor.putInt(PersistanceName.GRID_SIZE.name(), gridSize);
-
-			for (int i = 0; i < gridSize; i++) {
-				for (int j = 0; j < gridSize; j++) {
-					String name = PersistanceName.GRID_LETTERS.name(i
-					    * gridSize + j);
-					editor.putString(name, randomLetter());
-				}
-			}
-
-			editor.commit();
+			drawNewGrid(gridSize);
+		} else {
+			makeGrid(gridSize);
 		}
+	}
+
+	/**
+	 * Generate a new grid of the given size.
+	 * 
+	 * @param gridSize
+	 */
+	private void drawNewGrid(int gridSize) {
+		Editor editor = preferences.edit();
+		editor.putInt(PersistanceName.GRID_SIZE.name(), gridSize);
+
+		for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
+				String name = PersistanceName.GRID_LETTERS.name(i * gridSize
+				    + j);
+				editor.putString(name, randomLetter());
+			}
+		}
+
+		editor.commit();
 
 		makeGrid(gridSize);
 	}
 
+	/**
+	 * Re-draw the grid.
+	 * 
+	 * @param gridSize
+	 */
 	private void makeGrid(int gridSize) {
 		LinearLayout wordGrid = (LinearLayout) findViewById(R.id.wordgrid);
+		wordGrid.removeAllViews();
 		for (int i = 0; i < gridSize; i++) {
 			LinearLayout row = new LinearLayout(this);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -112,8 +128,9 @@ public class WordBoxActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_new:
-			Toast.makeText(WordBoxActivity.this, "New is Selected",
-			               Toast.LENGTH_SHORT).show();
+			int gridSize = preferences.getInt(PersistanceName.GRID_SIZE.name(),
+			                                  0);
+			drawNewGrid(gridSize);
 			return true;
 
 		case R.id.menu_toggle_timer:
