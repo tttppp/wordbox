@@ -1,6 +1,7 @@
 package com.github.tttppp.wordbox;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import com.github.tttppp.wordbox.letters.GridGenerator;
+import com.github.tttppp.wordbox.letters.GridGeneratorFactory;
+import com.github.tttppp.wordbox.letters.GridGeneratorType;
 import com.github.tttppp.wordbox.persistence.PersistanceName;
 import com.github.tttppp.wordbox.ui.component.FontFitTextView;
 
@@ -50,6 +54,13 @@ public class WordBoxActivity extends Activity {
 	 * @param gridSize
 	 */
 	private void drawNewGrid(int gridSize) {
+		String typeName = preferences.getString(PersistanceName.GENERATION_TYPE
+		    .name(), GridGeneratorType.ALPHABET.name());
+		GridGeneratorType type = GridGeneratorType.valueOf(typeName);
+		GridGenerator gridGenerator = GridGeneratorFactory
+		    .getGridGenerator(type);
+		List<List<String>> letters = gridGenerator.generate(gridSize);
+
 		Editor editor = preferences.edit();
 		editor.putInt(PersistanceName.GRID_SIZE.name(), gridSize);
 
@@ -57,7 +68,7 @@ public class WordBoxActivity extends Activity {
 			for (int j = 0; j < gridSize; j++) {
 				String name = PersistanceName.GRID_LETTERS.name(i * gridSize
 				    + j);
-				editor.putString(name, randomLetter());
+				editor.putString(name, letters.get(i).get(j));
 			}
 		}
 
