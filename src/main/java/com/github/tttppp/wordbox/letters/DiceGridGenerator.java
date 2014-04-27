@@ -1,10 +1,9 @@
 package com.github.tttppp.wordbox.letters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 
 public class DiceGridGenerator implements GridGenerator {
 	List<List<String>> dice;
